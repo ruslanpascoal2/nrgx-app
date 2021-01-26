@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: "404", loadChildren: () => import("./pages/notfound/notfound.module").then((m) => m.NotfoundModule) },
   {
     path: "home",
+    canActivate: [AuthGuard],
     loadChildren: () => import("./pages/home/home.module").then((m) => m.HomeModule),
   },
   { path: "**", redirectTo: "404" },

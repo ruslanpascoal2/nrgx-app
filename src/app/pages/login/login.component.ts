@@ -2,8 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
+import { tap } from "rxjs/operators";
 import { AppState } from "src/app/reducers";
 import { login } from "./login.actions";
+import { LoginService } from "./login.service";
 
 @Component({
   selector: "app-login",
@@ -12,13 +14,17 @@ import { login } from "./login.actions";
 })
 export class LoginComponent implements OnInit {
   validateForm!: FormGroup;
-  constructor(private fb: FormBuilder, private store: Store<AppState>, private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private store: Store<AppState>,
+    private router: Router,
+    private loginService: LoginService
+  ) {}
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
-      username: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      remember: [true],
+      email: ["eve.holt@reqres.in", [Validators.required]],
+      password: ["cityslicka", [Validators.required]],
     });
   }
   submitForm(): void {
@@ -28,8 +34,13 @@ export class LoginComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       const user = this.validateForm.value;
-      this.store.dispatch(login({ user }));
-      this.router.navigate([""]);
+
+      this.loginService
+        .login(user)
+        .pipe(tap((x) => this.store.dispatch(login({ user }))))
+        .subscribe((res) => {
+          this.router.navigate(["home"]);
+        });
     }
   }
 }

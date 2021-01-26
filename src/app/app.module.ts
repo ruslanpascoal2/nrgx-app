@@ -18,6 +18,8 @@ import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
 import { reducers, metaReducers } from "./reducers";
 import { NzDropDownModule } from "ng-zorro-antd/dropdown";
+import { SharedModule } from "./shared/shared.module";
+import { EffectsModule } from "@ngrx/effects";
 
 registerLocaleData(pt);
 
@@ -33,8 +35,10 @@ registerLocaleData(pt);
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    SharedModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([]),
   ],
   providers: [{ provide: NZ_I18N, useValue: pt_BR }],
   bootstrap: [AppComponent],

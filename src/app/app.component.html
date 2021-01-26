@@ -1,8 +1,8 @@
 <nz-layout>
   <nz-header>
     <strong>NgrxApp</strong>
-    <a nz-dropdown *ngIf="user$ | async as _user" [nzDropdownMenu]="menu">
-      {{ _user.username }}
+    <a nz-dropdown *ngIf="user$ | async as _user" nzTrigger="click" [nzDropdownMenu]="menu">
+      {{ _user.email | username }}
       <i nz-icon nzType="down"></i>
     </a>
     <nz-dropdown-menu #menu="nzDropdownMenu">

@@ -7,9 +7,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NzFormModule } from "ng-zorro-antd/form";
 import { NzInputModule } from "ng-zorro-antd/input";
 import { NzDropDownModule } from "ng-zorro-antd/dropdown";
+import { UsernamePipe } from "./pipes/username.pipe";
 
 @NgModule({
-  declarations: [],
+  declarations: [UsernamePipe],
   imports: [
     CommonModule,
     NzButtonModule,
@@ -28,6 +29,7 @@ import { NzDropDownModule } from "ng-zorro-antd/dropdown";
     ReactiveFormsModule,
     NzInputModule,
     NzDropDownModule,
+    UsernamePipe,
   ],
 })
 export class SharedModule {}

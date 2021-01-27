@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { tap } from "rxjs/operators";
-import { AppState } from "src/app/reducers";
-import { login } from "./login.actions";
+import { AppState } from "src/app/store/reducers";
+import { login } from "./store/actions/login.actions";
 import { LoginService } from "./login.service";
 
 @Component({

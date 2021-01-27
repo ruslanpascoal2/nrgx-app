@@ -16,10 +16,11 @@ import pt from "@angular/common/locales/pt";
 import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
-import { reducers, metaReducers } from "./reducers";
+import { reducers, metaReducers } from "./store/reducers";
 import { NzDropDownModule } from "ng-zorro-antd/dropdown";
 import { SharedModule } from "./shared/shared.module";
 import { EffectsModule } from "@ngrx/effects";
+import { RouterState, StoreRouterConnectingModule } from "@ngrx/router-store";
 
 registerLocaleData(pt);
 
@@ -36,9 +37,21 @@ registerLocaleData(pt);
     HttpClientModule,
     BrowserAnimationsModule,
     SharedModule,
-    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreModule.forRoot(reducers, {
+      metaReducers,
+      runtimeChecks: {
+        strictStateImmutability: true,
+        strictActionImmutability: true,
+        strictActionSerializability: true,
+        strictStateSerializability: true,
+      },
+    }),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     EffectsModule.forRoot([]),
+    StoreRouterConnectingModule.forRoot({
+      stateKey: "router",
+      routerState: RouterState.Minimal,
+    }),
   ],
   providers: [{ provide: NZ_I18N, useValue: pt_BR }],
   bootstrap: [AppComponent],

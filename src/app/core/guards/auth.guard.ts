@@ -3,8 +3,8 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Rout
 import { select, Store } from "@ngrx/store";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
-import { isLoggedIn } from "src/app/pages/login/login.selectors";
-import { AppState } from "src/app/reducers";
+import { isLoggedIn } from "src/app/pages/login/store/selectors/login.selectors";
+import { AppState } from "src/app/store/reducers";
 
 @Injectable({
   providedIn: "root",

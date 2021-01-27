@@ -1,6 +1,6 @@
 import { ActionReducerMap, createReducer, on } from "@ngrx/store";
-import { LoginActions } from "../action-types";
-import { User } from "../models/user.model";
+import { LoginActions } from "../actions";
+import { User } from "../../models/user.model";
 
 export interface LoginState {
   user: User;
